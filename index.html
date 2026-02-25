@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>BUTECH · Centre de formation informatique · Butembo</title>
+    <!-- Tailwind + police + Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background: #f8fafc; }
+        /* glassmorphisme / cartes élégantes */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 20px 30px -10px rgba(0,50,100,0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 40px -12px rgba(0,80,150,0.25);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: 0 10px 15px -5px rgba(37,99,235,0.4);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            transform: scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(37,99,235,0.5);
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        /* fade-in on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* petite animation de chargement pour les cartes */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+<!-- navigation collante + élégante -->
+<nav class="fixed top-0 left-0 w-full z-50 glass-card border-b border-white/30 px-4 md:px-8 py-3">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <a href="#accueil" class="text-2xl font-bold text-blue-900 flex items-center gap-2">
+            <i class="fas fa-laptop-code text-blue-600 text-3xl"></i>
+            <span class="tracking-tight">BUTECH<span class="text-blue-600">.</span></span>
+        </a>
+        <div class="hidden md:flex space-x-8 font-medium text-blue-900/80">
+            <a href="#concept" class="hover:text-blue-700 transition">Concept</a>
+            <a href="#equipe" class="hover:text-blue-700 transition">Équipe</a>
+            <a href="#marche" class="hover:text-blue-700 transition">Marché</a>
+            <a href="#moyens" class="hover:text-blue-700 transition">Moyens</a>
+            <a href="#previsions" class="hover:text-blue-700 transition">Prévisions</a>
+            <a href="#contact" class="hover:text-blue-700 transition">Contact</a>
+        </div>
+        <button class="md:hidden text-blue-900 text-2xl" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    <!-- menu mobile -->
+    <div id="mobileMenu" class="md:hidden hidden flex-col mt-3 bg-white/90 backdrop-blur rounded-2xl p-4 gap-3 text-blue-900 font-medium">
+        <a href="#concept" class="block py-2 hover:text-blue-700" onclick="toggleMenu()">Concept</a>
+        <a href="#equipe" class="block py-2 hover:text-blue-700" onclick="toggleMenu()">Équipe</a>
+        <a href="#marche" class="block py-2 hover:text-blue-700" onclick="toggleMenu()">Marché</a>
+        <a href="#moyens" class="block py-2 hover:text-blue-700" onclick="toggleMenu()">Moyens</a>
+        <a href="#previsions" class="block py-2 hover:text-blue-700" onclick="toggleMenu()">Prévisions</a>
+        <a href="#contact" class="block py-2 hover:text-blue-700" onclick="toggleMenu()">Contact</a>
+    </div>
+</nav>
+
+<!-- contenu principal (avec espace pour la navbar) -->
+<main class="pt-24 max-w-6xl mx-auto px-4 md:px-8">
+
+    <!-- ACCUEIL / HERO -->
+    <section id="accueil" class="min-h-[80vh] flex items-center justify-center relative overflow-hidden mb-16">
+        <div class="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 via-white to-blue-50/30"></div>
+        <div class="text-center md:text-left md:flex md:items-center md:gap-12">
+            <div class="md:w-1/2 fade-in visible">
+                <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold inline-block mb-4">🚀 Ouverture 2026 • Butembo</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                    Le premier <span class="text-blue-700">hub numérique</span><br> au cœur de Butembo
+                </h1>
+                <p class="text-lg text-gray-600 mt-6 max-w-xl md:mx-0 mx-auto">
+                    Formation, cyber premium, solutions digitales et maintenance.  
+                    <strong class="text-blue-800">BUTECH</strong> démocratise l’accès au numérique pour tous.
+                </p>
+                <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#concept" class="btn-primary">Découvrir <i class="fas fa-arrow-right ml-2"></i></a>
+                    <a href="#contact" class="bg-white border-2 border-blue-600 text-blue-700 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition">Nous contacter</a>
+                </div>
+                <div class="flex gap-6 mt-10 text-blue-800/70 justify-center md:justify-start">
+                    <div class="text-center"><i class="fas fa-graduation-cap text-2xl"></i><p class="text-sm font-medium">+15k étudiants</p></div>
+                    <div class="text-center"><i class="fas fa-store text-2xl"></i><p class="text-sm font-medium">Commerçants</p></div>
+                    <div class="text-center"><i class="fas fa-building text-2xl"></i><p class="text-sm font-medium">ONG/PME</p></div>
+                </div>
+            </div>
+            <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center animate-float">
+                <div class="relative">
+                    <div class="w-72 h-72 bg-blue-200/50 rounded-full blur-3xl absolute -z-10"></div>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='%232563eb20'/%3E%3Cpath d='M70 70 L130 70 L130 130 L70 130 Z' fill='%231e3a8a' opacity='0.1'/%3E%3Ctext x='50' y='120' font-family='Arial' font-size='30' fill='%231e3a8a' font-weight='bold'%3EBUTECH%3C/text%3E%3C/svg%3E" alt="illustration" class="w-80 drop-shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONCEPT / SERVICES (4 pôles) -->
+    <section id="concept" class="py-16 fade-in">
+        <h2 class="text-4xl font-bold text-center text-gray-800">Notre concept <span class="text-blue-600">· 4 pôles</span></h2>
+        <p class="text-center text-gray-500 mt-3 max-w-2xl mx-auto">Un centre unique qui répond à tous vos besoins numériques.</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+            <div class="glass-card p-6 rounded-3xl">
+                <i class="fas fa-chalkboard-teacher text-4xl text-blue-700 mb-4"></i>
+                <h3 class="text-xl font-bold">Académie numérique</h3>
+                <p class="text-gray-600 text-sm mt-2">Excel, marketing digital, comptabilité, initiation · formations certifiantes.</p>
+            </div>
+            <div class="glass-card p-6 rounded-3xl delay-100">
+                <i class="fas fa-wifi text-4xl text-blue-700 mb-4"></i>
+                <h3 class="text-xl font-bold">Cyber premium</h3>
+                <p class="text-gray-600 text-sm mt-2">Fibre optique, impressions qualité, aide aux mémoires, numérisation.</p>
+            </div>
+            <div class="glass-card p-6 rounded-3xl delay-200">
+                <i class="fas fa-bullhorn text-4xl text-blue-700 mb-4"></i>
+                <h3 class="text-xl font-bold">Solutions digitales</h3>
+                <p class="text-gray-600 text-sm mt-2">Flyers, logos, sites web, community management pour entreprises.</p>
+            </div>
+            <div class="glass-card p-6 rounded-3xl delay-300">
+                <i class="fas fa-tools text-4xl text-blue-700 mb-4"></i>
+                <h3 class="text-xl font-bold">Maintenance</h3>
+                <p class="text-gray-600 text-sm mt-2">Dépannage, installation, vente d’accessoires (clés USB, câbles).</p>
+            </div>
+        </div>
+        <!-- petite phrase -->
+        <div class="mt-12 text-center bg-blue-50/70 p-6 rounded-3xl">
+            <p class="text-lg italic text-gray-700">“Là où les autres impriment, nous formons et conseillons.”</p>
+        </div>
+    </section>
+
+    <!-- ÉQUIPE -->
+    <section id="equipe" class="py-16 fade-in">
+        <h2 class="text-4xl font-bold text-center text-gray-800">Porteurs du projet</h2>
+        <p class="text-center text-gray-500">Deux profils complémentaires · L3 IAGE</p>
+        <div class="flex flex-col md:flex-row justify-center gap-8 mt-12">
+            <div class="glass-card p-6 rounded-3xl text-center md:w-1/3">
+                <div class="w-28 h-28 mx-auto bg-gradient-to-br from-blue-800 to-blue-400 rounded-full flex items-center justify-center text-white text-4xl font-bold">G</div>
+                <h3 class="text-2xl font-bold mt-4">Grace KAMBALE</h3>
+                <span class="text-blue-700 font-medium">Responsable technique</span>
+                <p class="text-gray-600 text-sm mt-3">Diplômé en informatique de gestion. Passionné de réseaux, maintenance et développement. Garant de la qualité technique.</p>
+            </div>
+            <div class="glass-card p-6 rounded-3xl text-center md:w-1/3">
+                <div class="w-28 h-28 mx-auto bg-gradient-to-br from-blue-700 to-blue-300 rounded-full flex items-center justify-center text-white text-4xl font-bold">G</div>
+                <h3 class="text-2xl font-bold mt-4">Germaine KASOKI</h3>
+                <span class="text-blue-700 font-medium">Responsable commerciale & marketing</span>
+                <p class="text-gray-600 text-sm mt-3">Licence en sciences commerciales. Expérience en vente et communication. Stratégie, relation client et formations marketing.</p>
+            </div>
+        </div>
+        <p class="text-center text-gray-500 mt-8">Soutenus par un entrepreneur local (membre FEC) et nos familles.</p>
+    </section>
+
+    <!-- MARCHÉ + SWOT rapide -->
+    <section id="marche" class="py-16 fade-in">
+        <div class="bg-white/70 rounded-3xl p-8 shadow-lg border border-white/50">
+            <h2 class="text-4xl font-bold text-gray-800">Marché & opportunité</h2>
+            <div class="grid md:grid-cols-2 gap-8 mt-6">
+                <div>
+                    <p class="text-gray-600"><span class="font-bold text-blue-700">15 000+ étudiants</span> · des centaines de commerces et ONG à Butembo. Demande explosive en compétences digitales.</p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex gap-2"><i class="fas fa-check-circle text-blue-600 mt-1"></i> <span>Cybercafés vieillissants, sans formation</span></li>
+                        <li class="flex gap-2"><i class="fas fa-check-circle text-blue-600 mt-1"></i> <span>Formateurs indépendants sans local fixe</span></li>
+                        <li class="flex gap-2"><i class="fas fa-check-circle text-blue-600 mt-1"></i> <span>Besoin d’un partenaire de confiance</span></li>
+                    </ul>
+                </div>
+                <div class="bg-blue-50 p-5 rounded-2xl">
+                    <h3 class="font-bold text-lg">SWOT éclair</h3>
+                    <div class="grid grid-cols-2 gap-2 mt-3 text-sm">
+                        <div class="bg-white p-2 rounded"><span class="font-semibold">Forces:</span> équipe complémentaire, locale</div>
+                        <div class="bg-white p-2 rounded"><span class="font-semibold">Faiblesses:</span> notoriété zéro, fonds limités</div>
+                        <div class="bg-white p-2 rounded"><span class="font-semibold">Opportunités:</span> fibre optique, appétit digital</div>
+                        <div class="bg-white p-2 rounded"><span class="font-semibold">Menaces:</span> électricité, concurrence prix</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOYENS (local, matériel, horaires) -->
+    <section id="moyens" class="py-16 fade-in">
+        <h2 class="text-4xl font-bold text-center text-gray-800">Moyens & organisation</h2>
+        <div class="grid md:grid-cols-3 gap-5 mt-10">
+            <div class="glass-card p-5 rounded-2xl">
+                <i class="fas fa-map-pin text-blue-600 text-2xl"></i>
+                <h3 class="font-bold mt-2">Local stratégique</h3>
+                <p class="text-sm">30m² sur avenue X, proche ISP/UOR. Peinture, grilles, comptoir moderne.</p>
+            </div>
+            <div class="glass-card p-5 rounded-2xl">
+                <i class="fas fa-microchip text-blue-600 text-2xl"></i>
+                <h3 class="font-bold mt-2">Équipement clé</h3>
+                <p class="text-sm">4 PC bureau, portable, 2 imprimantes laser, vidéoprojecteur, groupe électrogène, onduleurs.</p>
+            </div>
+            <div class="glass-card p-5 rounded-2xl">
+                <i class="fas fa-clock text-blue-600 text-2xl"></i>
+                <h3 class="font-bold mt-2">Horaires</h3>
+                <p class="text-sm">8h-20h · formations en journée, affluence étudiante en soirée.</p>
+            </div>
+        </div>
+        <p class="text-center mt-8 text-gray-600">Coûts fixes mensuels : 550$ (loyer, internet fibre, électricité, taxes)</p>
+    </section>
+
+    <!-- PRÉVISIONS FINANCIÈRES + tableau synthétique -->
+    <section id="previsions" class="py-16 fade-in">
+        <div class="bg-gradient-to-br from-blue-900 to-blue-800 text-white rounded-3xl p-8 shadow-2xl">
+            <h2 class="text-3xl md:text-4xl font-bold">Prévisions financières</h2>
+            <p class="text-blue-100 mt-1">Année 1 · objectif 10 445 $</p>
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+                <div>
+                    <ul class="space-y-3">
+                        <li class="flex justify-between border-b border-blue-400 pb-1"><span>Cyber/impression</span> <span class="font-mono">1 620 $</span></li>
+                        <li class="flex justify-between border-b border-blue-400 pb-1"><span>Formations</span> <span class="font-mono">3 500 $</span></li>
+                        <li class="flex justify-between border-b border-blue-400 pb-1"><span>Services digitaux</span> <span class="font-mono">750 $</span></li>
+                        <li class="flex justify-between border-b border-blue-400 pb-1"><span>Maintenance/accessoires</span> <span class="font-mono">375 $</span></li>
+                        <li class="flex justify-between border-b border-blue-400 pb-1"><span>Projets pros (sites)</span> <span class="font-mono">3 000 $</span></li>
+                        <li class="flex justify-between font-bold text-lg"><span>TOTAL</span> <span>10 445 $</span></li>
+                    </ul>
+                </div>
+                <div class="bg-white/20 p-5 rounded-2xl backdrop-blur">
+                    <p class="font-semibold text-lg">💡 Besoin de démarrage : 11 500 $</p>
+                    <ul class="text-sm space-y-1 mt-2">
+                        <li>• Matériel & équipement : 5 000 $</li>
+                        <li>• Aménagement, com, frais : 1 500 $</li>
+                        <li>• Trésorerie (3-4 mois) : 4 000 $</li>
+                    </ul>
+                    <p class="mt-4 text-sm">Croissance 30% / an · retour sur investissement année 2</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / APPEL À FINANCEMENT / RÉSEAUX -->
+    <section id="contact" class="py-20 fade-in text-center">
+        <h2 class="text-4xl font-bold text-gray-800">Prêt à nous rejoindre ?</h2>
+        <p class="text-gray-500 max-w-xl mx-auto mt-3">Investisseurs, partenaires, premiers clients : nous sommes à l’écoute.</p>
+        <div class="flex flex-wrap justify-center gap-6 mt-8">
+            <a href="#" class="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2 shadow-lg hover:bg-blue-700 transition"><i class="fab fa-whatsapp text-xl"></i> +243 XXX XXX XXX</a>
+            <a href="#" class="bg-white border border-blue-600 text-blue-700 px-8 py-4 rounded-full font-semibold flex items-center gap-2 shadow hover:bg-blue-50"><i class="far fa-envelope"></i> butech@contact.cd</a>
+        </div>
+        <div class="flex justify-center gap-5 mt-8 text-blue-700 text-3xl">
+            <a href="#" class="hover:scale-110 transition"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:scale-110 transition"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p class="text-sm text-gray-400 mt-8">📍 Kambali, Université de l'Assomption au Congo · Ouverture 26/02/2026</p>
+    </section>
+</main>
+
+<!-- footer -->
+<footer class="text-center py-6 text-gray-500 border-t border-gray-200 text-sm">
+    © 2026 BUTECH · Business & Technology Hub · Projet L3 IAGE Groupe 7
+</footer>
+
+<!-- script pour fade-in, menu mobile -->
+<script>
+    // menu mobile
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    function toggleMenu() {
+        mobileMenu.classList.add('hidden');
+    }
+
+    // fade-in on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2, rootMargin: '0px 0px -30px 0px' };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // une fois visible, on arrête
+            }
+        });
+    }, appearOptions);
+    faders.forEach(fader => appearOnScroll.observe(fader));
+
+    // smooth navigation pour mobile
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if(target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // fermer le menu si ouvert
+                if (!mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden');
+            }
+        });
+    });
+</script>
+
+<!-- petites animations en plus : hover cards déjà en css -->
+</body>
+</html>
